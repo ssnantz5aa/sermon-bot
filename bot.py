@@ -112,3 +112,12 @@ telegram_app.add_handler(MessageHandler(filters.ALL, handle_message))
 
 if __name__ == "__main__":
     telegram_app.run_polling()
+if __name__ == "__main__":
+    telegram_app = ApplicationBuilder().token(TOKEN).build()
+
+    telegram_app.add_handler(CommandHandler("start", start))
+    telegram_app.add_handler(MessageHandler(filters.Document.ALL, handle_document))
+    telegram_app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_text))
+    telegram_app.add_handler(CallbackQueryHandler(button_handler))
+
+    telegram_app.run_polling()
